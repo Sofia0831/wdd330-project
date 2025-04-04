@@ -1,0 +1,121 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #731f1e;
+    --secondary-color: #f5faff;
+    --accent1-color: #e9dddc;
+    --accent2-color: #000;
+
+    --heading-font: 'Bebas Neue', sans-serif;
+    --paragraph-font: 'Arial', sans-serif;
+    
+}
+
+header, footer {
+    background-color: var(--primary-color);
+    padding: 1rem;
+    color: var(--secondary-color);
+    font-family: var(--heading-font);
+}
+
+main {
+    background-color: var(--secondary-color);
+    padding: 20px;
+    min-height: 350px;
+    box-sizing: border-box;
+}
+
+.title-header {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.search {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    border-radius: 28px;
+    background: #f6f6f6;
+    border: 2px solid var(--primary-color);
+    margin: 0 auto;
+}
+
+.search-icon {
+    background-color: var(--primary-color);
+    padding: 1rem;
+    margin: 0;
+    border-top-left-radius: 22px ;
+    border-bottom-left-radius: 22px;
+    color: var(--secondary-color);
+}
+
+.search-input {
+    font-size: 16px;
+    font-family: var(--paragraph-font);
+    color: #333333;
+    outline: none;
+    border: none;
+    background: transparent;
+    padding: 1rem 2rem;
+
+}
+
+.movielist {
+    font-family: var(--heading-font);
+    text-align: center;
+    
+    p {
+        font-family: var(--paragraph-font);
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        margin-top: 30px;
+        margin-bottom: 0;
+    }
+
+}
+
+footer {
+    width: 100%;
+    color: var(--secondary-color);
+}
+
+footer p {
+    text-align: center;
+    padding: 0.5rem;
+    font-size: 18px;
+}
+
+#lastModified {
+    font-size: 15px;
+    padding-top: 0;
+}
+
+@media (min-width: 700px) {
+    .search {
+        width: 600px;
+    }
+    .title-header {
+        margin: 0 auto;
+        justify-content: center;
+        grid-gap: 20px;
+
+        h1 {
+            font-size: 50px;
+        }
+    
+        img {
+            width: 100px;
+            height: 100px;
+        }
+    }
+    
+    
+}

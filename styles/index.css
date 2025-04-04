@@ -38,7 +38,6 @@ main {
 .search {
     width: fit-content;
     display: flex;
-    align-items: center;
     border-radius: 28px;
     background: #f6f6f6;
     border: 2px solid var(--primary-color);
@@ -61,8 +60,11 @@ main {
     outline: none;
     border: none;
     background: transparent;
-    padding: 1rem 2rem;
+    padding: 1rem 2rem 1rem 0.5rem;
+}
 
+.search-input::placeholder {
+    text-align: left;
 }
 
 .movielist {
@@ -118,6 +120,9 @@ footer p {
     }
     main {
         min-height: 500px;
+    }
+    .search-input {
+        padding: 1rem 10vw 1rem 1rem;
     }
     
     

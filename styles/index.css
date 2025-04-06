@@ -67,14 +67,16 @@ main {
     text-align: left;
 }
 
-.movielist {
+.main-body {
     font-family: var(--heading-font);
     text-align: center;
+    margin-bottom: 30px;
     
     p {
         font-family: var(--paragraph-font);
         margin: 0;
         padding: 0;
+        margin-bottom: 30px;
     }
 
     h1 {
@@ -82,6 +84,36 @@ main {
         margin-bottom: 0;
     }
 
+}
+
+#movielist {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+}
+
+.movie-item {
+    background-color: var(--accent1-color);
+    margin: 20px;
+    padding: 1rem;
+    max-width: 500px;
+    text-align: center;
+
+    h3 {
+        font-family: var(--heading-font);
+        margin: .5rem 1rem 0;
+    }
+
+    p {
+        font-family: var(--paragraph-font);
+    }
+
+    a {
+        text-decoration: none;
+        color: var(--accent2-color);
+    }
 }
 
 footer {

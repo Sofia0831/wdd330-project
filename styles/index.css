@@ -100,6 +100,13 @@ main {
     padding: 1rem;
     max-width: 500px;
     text-align: center;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    transition: transform 0.3s ease-in-out;
+
+    img {
+        border-radius: 5px;
+    }
 
     h3 {
         font-family: var(--heading-font);
@@ -114,6 +121,11 @@ main {
         text-decoration: none;
         color: var(--accent2-color);
     }
+}
+
+.movie-item:hover {
+    box-shadow: 5px 7px 10px 4px var(--primary-color);
+    transform: translateY(-10px);
 }
 
 footer {

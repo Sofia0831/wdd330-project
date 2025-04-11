@@ -157,7 +157,7 @@ main {
 
     h1 {
         font-family: var(--heading-font);
-        font-size: 23px;
+        font-size: 28px;
         grid-area: title;
     }
 
@@ -179,12 +179,12 @@ main {
     h3 {
         font-family: var(--paragraph-font);
         margin-top: 10px;
-        font-size: 15px;
+        font-size: 20px;
     }
 
     p {
         font-family: var(--paragraph-font);
-        font-size: 13px;
+        font-size: 20px;
     }
 
     .genre {
@@ -213,6 +213,7 @@ main {
         width: fit-content;
         margin: 1rem ;
         grid-area: button;
+        font-family: var(--paragraph-font);
     }
 
     a:hover {
@@ -294,7 +295,7 @@ footer p {
         max-width: 100%;
 
         h1 { 
-            font-size: 35px;
+            font-size: 38px;
             text-align: left;
             padding-left: 1.5rem;
         }
@@ -303,9 +304,9 @@ footer p {
         img {
             height: 400px;
         }
-        h3 {font-size: 20px;}
-        p {font-size: 15px;}
-        .genre {font-size: 13px;}
+        h3 {font-size: 23px;}
+        p {font-size: 20px;}
+        .genre {font-size: 18px;}
     }
 
     .videos-container {

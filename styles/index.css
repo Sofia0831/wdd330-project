@@ -319,6 +319,7 @@ footer p {
 
         iframe {
             width: 90%;
+            height: 400px;
             margin: 1rem;
         }
     }

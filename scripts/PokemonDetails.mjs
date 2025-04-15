@@ -1,5 +1,4 @@
 const apiKey = `909bfc0e390cfccd8618b5ec5802f332`;
-const ytApiKey = `AIzaSyCpQehRe86TXmCJDaxk0mtI5jtLAR-iH8A`;
 
 const moviedeets = document.getElementById('moviedeets');
 const videodeets = document.getElementById('videodeets');
@@ -28,7 +27,6 @@ export async function fetchMovieDetails(movieId) {
     }
 
 }
-
 
 function displayMovieDetails(movie) {
     const {title, poster_path, release_date, overview, original_title, genres, tagline, homepage} = movie;
@@ -109,4 +107,5 @@ function displayMovieVideos(videos) {
         videodeets.innerHTML = '<p>No videos found for this movie.</p>';
     }
 }
+
 

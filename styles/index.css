@@ -111,6 +111,10 @@ main {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+
+    h2 {
+        font-family: var(--heading-font);
+    }
     
 }
 

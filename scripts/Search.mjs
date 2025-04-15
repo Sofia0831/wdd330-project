@@ -82,8 +82,8 @@ export async function handleSearch(pokemonName, container) {
     const moviesForPokemon = pokemonData.pokemon_movies?.[lowercaseName];
 
     if (moviesForPokemon && moviesForPokemon.length > 0) {
-        header.innerHTML = `<h2>Found ${moviesForPokemon.length} movie(s) for ${pokemonName}</h2>`
         container.innerHTML = ``;
+        header.innerHTML = `<h2>Found ${moviesForPokemon.length} movie(s) for "${pokemonName}"</h2>`;
         console.log(`Movies found for ${pokemonName}:`, moviesForPokemon);
 
         const detailPromises = moviesForPokemon.map(ref => fetchMoviebyIdSearch(ref.tmdb_id));
@@ -99,6 +99,8 @@ export async function handleSearch(pokemonName, container) {
     }
     else {
         console.log(`No movies found for ${pokemonName}`);
+        container.innerHTML =``;
+        header.innerHTML = `<h2 class="no-results">Sorry no movies were found for "${pokemonName}"</h2>`;
     }
 }
 

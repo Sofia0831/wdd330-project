@@ -22,3 +22,10 @@ document.addEventListener('DOMContentLoaded', () => {
     loadMockyData();
 
 });
+
+const videoModal = document.getElementById('videoModal');
+
+// const closeModalButton = profileModal.getElementById('closeModal');
+//     closeModalButton.addEventListener("click", () => {
+//         videoModal.close();
+//     });

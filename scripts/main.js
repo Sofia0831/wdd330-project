@@ -1,31 +1,128 @@
 import { updateFooter } from "./utils.js";
-import { fetchMovies } from "./PokemonList.mjs";
+import { fetchMovies, displayMovies, sortMovies } from "./PokemonList.mjs";
 import { loadMockyData, handleSearch } from "./Search.mjs";
 
-document.addEventListener('DOMContentLoaded', () => {
+let currentList = [];
+
+loadMockyData();
+
+document.addEventListener('DOMContentLoaded', async () => {
     const footerElement = document.querySelector("footer");
     updateFooter(footerElement);
 
     const container = document.getElementById('movielist');
 
+    const sortSelect = document.getElementById('sort-select');
+    const lastSort = localStorage.getItem('lastSort');
+    let initialSort = 'default';
+    if (lastSort && sortSelect) {
+        sortSelect.value = lastSort;
+        initialSort = lastSort;
+    }
+
     const searchForm = document.getElementById('search-form');
     const searchInput = document.getElementById('search-input');
-    if (searchForm && searchInput) {
-        searchForm.addEventListener('submit', (event) => {
-            event.preventDefault();
-            handleSearch(searchInput.value, container);
+
+    const clearSearchButton = document.getElementById('clear-search-button');
+    if (clearSearchButton) {
+        clearSearchButton.addEventListener('click', () => {
+            location.reload();
         });
     }
-    
-    
-    fetchMovies(container);
-    loadMockyData();
+
+    const fullMovieList = await fetchMovies();
+    currentList = [...fullMovieList];
+    const initiallySortedMovies = sortMovies(currentList, initialSort);
+    currentList = initiallySortedMovies;
+    displayMovies(currentList, container);
+
+    if (searchForm && searchInput) {
+        searchForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            sortSelect.value = 'default';
+
+            const searchResults = await handleSearch(searchInput.value, container);
+            if (Array.isArray(searchResults)) {
+                currentList = searchResults;
+            }
+            else {
+                currentList = [];
+            }
+
+            const searchTerm = searchInput.value.trim();
+            if (searchTerm) {
+                handleSearch(searchTerm, container);
+                localStorage.setItem('lastPokemonSearch', searchTerm);
+                let recent = JSON.parse(localStorage.getItem('recentPokemonSearches')) || [];
+                recent = recent.filter(term => term.toLowerCase() !== searchTerm.toLowerCase());
+                recent.unshift(searchTerm);
+                recent = recent.slice(0, 5);
+                localStorage.setItem('recentPokemonSearches', JSON.stringify(recent));
+                displayRecentSearches(recent);
+            }
+        });
+    }
+
+    function displayRecentSearches(searchTerms) {
+        const recentContainer = document.getElementById('recent-searches');
+        recentContainer.innerHTML = '<h4>Recent Searches:</h4>';
+        if (searchTerms.length === 0) {
+            recentContainer.innerHTML += '<p>No recent searches.</p>';
+            return;
+        }
+        const list = document.createElement('ul');
+        searchTerms.forEach(term => {
+            const item = document.createElement('li');
+            const link = document.createElement('a');
+            link.href = '#'; 
+            link.textContent = term;
+            link.classList.add('recent-search-link');
+            link.dataset.term = term;
+            item.appendChild(link);
+            list.appendChild(item);
+        });
+        recentContainer.appendChild(list);
+
+        recentContainer.addEventListener('click', (e) => {
+            if (e.target.classList.contains('recent-search-link')) {
+                e.preventDefault();
+                const term = e.target.dataset.term;
+                searchInput.value = term;
+                handleSearch(term, container); 
+            }
+        });
+    }
+
+    sortSelect.addEventListener('change', (event) => {
+        const sortByValue = event.target.value;
+        localStorage.setItem('lastSort', sortByValue);
+        const moviesToDisplay = sortMovies(currentList, sortByValue);
+        displayMovies(moviesToDisplay, container);
+        
+    });
+
+    const visitorInfo = document.querySelector("#here");
+    const lastVisit = localStorage.getItem("lastVisit");
+    const currentDate = new Date();
+
+    if (lastVisit === null) {
+    	visitorInfo.textContent = "";
+    } else {
+    	const lastVisitDate = new Date(lastVisit);
+    	const timeDiff = currentDate.getTime() - lastVisitDate.getTime();
+    	const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+
+    	if (daysDiff < 1) {
+    		visitorInfo.textContent = "Back so soon! Awesome!";
+    	} else if (daysDiff === 1) {
+    		visitorInfo.textContent = "You last visited 1 day ago.";
+    	} else {
+    		visitorInfo.textContent = `You last visited ${daysDiff} days ago.`;
+    	}
+    }
+
+    localStorage.setItem("lastVisit", currentDate.toString());
 
 });
 
-const videoModal = document.getElementById('videoModal');
 
-// const closeModalButton = profileModal.getElementById('closeModal');
-//     closeModalButton.addEventListener("click", () => {
-//         videoModal.close();
-//     });

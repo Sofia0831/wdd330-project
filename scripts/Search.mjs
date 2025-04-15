@@ -63,17 +63,14 @@ export async function handleSearch(pokemonName, container) {
         console.error("handleSearch: Container element not provided!");
         return;
     }
-
     if (!lowercaseName) {
         console.log("Search term is empty.");
         return;
     }
-
     if (isLoading){
         console.log("Data still loading, please wait.");
         return;
     }
-    
     if (!pokemonData) {
         console.error("Pokemon data failed to load");
         return;
@@ -92,15 +89,18 @@ export async function handleSearch(pokemonName, container) {
             const movieResults = await Promise.all(detailPromises);
             const validResults = movieResults.filter(details => details !== null);
             displaySearchResults(validResults, container);
+            return validResults;
         }
         catch (error) {
             console.error("Error fetching details for search results:", error);
+            return null;
         }
     }
     else {
         console.log(`No movies found for ${pokemonName}`);
         container.innerHTML =``;
         header.innerHTML = `<h2 class="no-results">Sorry no movies were found for "${pokemonName}"</h2>`;
+        return null;
     }
 }
 

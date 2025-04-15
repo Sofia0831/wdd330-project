@@ -69,6 +69,7 @@ main {
 }
 
 .search-input {
+    width: 100%;
     font-size: 16px;
     font-family: var(--paragraph-font);
     color: #333333;
@@ -78,13 +79,22 @@ main {
     padding: 1rem 2rem 1rem 0.5rem;
 }
 
-.search-input:focus {
-    outline: none;
-}
-
-
 .search-input::placeholder {
     text-align: left;
+}
+
+#clear-search-button {
+    background: transparent;
+    border:none;
+    padding: 1rem;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#clear-search-button:hover {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    transition: background-color 0.5s ease;
 }
 
 .main-body {
@@ -106,6 +116,30 @@ main {
 
 }
 
+.sortby {
+    margin-top: 2rem;
+    margin-bottom: 0;
+    margin-left: 30px;
+
+    select {
+        cursor: pointer;
+        background-color: var(--accent1-color);
+        color: var(--accent2-color);
+        padding: 0.5rem;
+        font-family: var(--paragraph-font);
+        font-size: 14px;
+        border: 2px solid var(--primary-color);
+        border-left: none;
+    }
+
+    label {
+        background-color: var(--primary-color);
+        padding: 0.5rem;
+        color: var(--secondary-color);
+        font-family: var(--heading-font);
+    }
+}
+
 #movielist {
     display: flex;
     flex-direction: row;
@@ -116,6 +150,29 @@ main {
         font-family: var(--heading-font);
     }
     
+}
+
+#recent-searches {
+    h4 {
+        font-size: 20px;
+    }
+    ul {
+        display: flex;
+        flex-direction: row;
+        list-style: none;
+        text-align: center;
+        justify-content: center;
+        gap: 10px;
+        font-size: 18px;
+    }
+    a {
+        color: var(--primary-color);
+    }
+}
+
+#here {
+    text-align: center;
+    font-family: var(--paragraph-font);
 }
 
 #search-result-header {
@@ -190,6 +247,12 @@ main {
         height: 300px;
         grid-area: poster;
         border-radius: 10px;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    img:hover {
+        transform: translateY(-10px);
+        box-shadow: 5px 7px 10px 4px var(--primary-color);
     }
 
     .og-title {grid-area: og;}
@@ -241,7 +304,9 @@ main {
     }
 
     a:hover {
-        background-color:#a34240;
+        background-color: var(--secondary-color);
+        color: var(--primary-color);
+        transition: background-color 0.5s ease;
     }
 
 }
@@ -282,6 +347,13 @@ main {
             width: 100%;
         }
 
+        
+        h4:hover {
+          background-color: var(--secondary-color);
+          color: var(--primary-color);
+          border: 1px solid var(--primary-color);
+          transition: background-color 0.4s ease;
+        }
     }
     
 }

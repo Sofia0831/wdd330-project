@@ -34,8 +34,13 @@
 
     <main>
         <div class="main-body">
+            <div class="welcome">
+                <div id="here">
+                </div>
+            </div>
             <h1>Welcome to the Pokemon MovieDex</h1>
             <p>Try searching for your favorite Pokemon to see what movies they show up in!</p>
+            <div id="recent-searches"></div>
         </div>
         <form id="search-form">
             <div class="search">
@@ -43,8 +48,20 @@
                     <span class="search-icon material-symbols-outlined">search</span>
                 </button>
                 <input id="search-input" type="search-input" class="search-input" placeholder="Search a Pokemon">
+                <button type="button" id="clear-search-button">×</button>
             </div>
         </form>
+
+        <div class="sortby">
+            <label for="sort-select">Sort by: </label>
+            <select id="sort-select">
+              <option value="default">Default</option>
+              <option value="title-asc">Name (A-Z)</option>
+              <option value="title-desc">Name (Z-A)</option>
+              <option value="date-asc">Date Released (Oldest)</option>
+              <option value="date-desc">Date Released (Newest)</option>
+            </select>
+          </div>
         <div id="search-result-header"></div>
         <div id="movielist"></div>
     </main>

@@ -33,16 +33,19 @@
     </header>
 
     <main>
-        <form action="">
-            <div class="search">
-                <span class="search-icon material-symbols-outlined">search</span>
-                <input type="search-input" class="search-input" placeholder="Search a Pokemon">
-            </div>
-        </form>
         <div class="main-body">
             <h1>Welcome to the Pokemon MovieDex</h1>
             <p>Try searching for your favorite Pokemon to see what movies they show up in!</p>
         </div>
+        <form id="search-form">
+            <div class="search">
+                <button type="submit" id="search-button" class="submit-button">
+                    <span class="search-icon material-symbols-outlined">search</span>
+                </button>
+                <input id="search-input" type="search-input" class="search-input" placeholder="Search a Pokemon">
+            </div>
+        </form>
+        <div id="search-result-header"></div>
         <div id="movielist"></div>
     </main>
 

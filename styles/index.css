@@ -46,8 +46,9 @@ main {
     display: flex;
     border-radius: 28px;
     background: #f6f6f6;
-    border: 2px solid var(--primary-color);
+    border: 1px solid var(--primary-color);
     margin: 0 auto;
+    overflow: hidden;
 }
 
 .search-icon {
@@ -59,6 +60,14 @@ main {
     color: var(--secondary-color);
 }
 
+.submit-button {
+    border: none;
+    overflow: hidden;
+    background: none;
+    color: inherit;
+    cursor: pointer;
+}
+
 .search-input {
     font-size: 16px;
     font-family: var(--paragraph-font);
@@ -68,6 +77,11 @@ main {
     background: transparent;
     padding: 1rem 2rem 1rem 0.5rem;
 }
+
+.search-input:focus {
+    outline: none;
+}
+
 
 .search-input::placeholder {
     text-align: left;
@@ -98,6 +112,12 @@ main {
     flex-wrap: wrap;
     justify-content: center;
     
+}
+
+#search-result-header {
+    font-family: var(--heading-font);
+    text-align: center;
+    padding: 2rem 1rem;
 }
 
 .movie-item {

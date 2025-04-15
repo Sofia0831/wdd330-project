@@ -1,10 +1,13 @@
 const apiKey = `909bfc0e390cfccd8618b5ec5802f332`;
 const listId = `8523840`;
-const apiUrl = `https://api.themoviedb.org/3/list/${listId}?api_key=${apiKey}&language=en-US`;
 
-const movielist = document.getElementById('movielist');
+export async function fetchMovies(container) {
+    if (!container) {
+        console.error("fetchMovies: Container element not provided!");
+        return;
+    }
+    const apiUrl = `https://api.themoviedb.org/3/list/${listId}?api_key=${apiKey}&language=en-US`;
 
-export async function fetchMovies() {
     let currentPage = 1;
     let totalPages = 1;
 
@@ -19,7 +22,7 @@ export async function fetchMovies() {
         totalPages = data.total_pages || 1;
         data.items.forEach(media => {
             const movieCard = createMovieCard(media);
-            movielist.appendChild(movieCard);
+            container.appendChild(movieCard);
         });
         
         currentPage++;
@@ -29,7 +32,7 @@ export async function fetchMovies() {
             const pageData = await nextPageResponse.json();
             pageData.items.forEach(media => {
                 const movieCard = createMovieCard(media);
-                movielist.appendChild(movieCard);
+                container.appendChild(movieCard);
             });
 
             currentPage++;
@@ -42,8 +45,9 @@ export async function fetchMovies() {
 }
 
 
-function createMovieCard(media) {
-    const {id, title, backdrop_path, release_date} = media;
+export function createMovieCard(media) {
+    const {id, title, backdrop_path, release_date} = media || {};
+    if (!id) return null;
 
     const movieCard = document.createElement("div");
     movieCard.classList.add("movie-item");
@@ -51,7 +55,7 @@ function createMovieCard(media) {
     const year = release_date.split('-')[0];
 
     movieCard.innerHTML = `
-        <a href="movie-details.html?id=${id}">
+        <a href="movie-details.html?id=${id}" target="_blank">
             <img src="https://image.tmdb.org/t/p/w500/${backdrop_path}" alt="${title} poster" width="300">
             <h3 class="title">${title}</h3>
             <p>(${year})</p>

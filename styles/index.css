@@ -97,6 +97,7 @@ main {
     transition: background-color 0.5s ease;
 }
 
+
 .main-body {
     font-family: var(--heading-font);
     text-align: center;
@@ -189,7 +190,6 @@ main {
     text-align: center;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    transition: transform 0.3s ease-in-out;
 
     img {
         border-radius: 5px;
@@ -210,11 +210,30 @@ main {
     }
 }
 
-.movie-item:hover {
-    box-shadow: 5px 7px 10px 4px var(--primary-color);
-    transform: translateY(-10px);
+.movie-item.animated-entry {
+    animation: slideIn 1s ease-out 1;
 }
 
+@keyframes slideIn {
+    0% {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
+.movie-item:hover {
+    box-shadow: 5px 7px 10px 4px var(--primary-color);
+    transform: translateY(-30px);
+    transition-delay: 0.05s;
+}
+
+.movie-item {
+    transition: transform 0.3s ease-in-out !important;
+}
 
 .movie-detail {
     background-color: var(--accent1-color);

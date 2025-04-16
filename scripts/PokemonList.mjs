@@ -69,6 +69,7 @@ export function createMovieCard(media) {
 
     const movieCard = document.createElement("div");
     movieCard.classList.add("movie-item");
+    movieCard.classList.add("animated-entry")
 
     const year = release_date.split('-')[0];
 

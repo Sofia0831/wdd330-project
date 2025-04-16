@@ -63,35 +63,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
-    function displayRecentSearches(searchTerms) {
-        const recentContainer = document.getElementById('recent-searches');
-        recentContainer.innerHTML = '<h4>Recent Searches:</h4>';
-        if (searchTerms.length === 0) {
-            recentContainer.innerHTML += '<p>No recent searches.</p>';
-            return;
-        }
-        const list = document.createElement('ul');
-        searchTerms.forEach(term => {
-            const item = document.createElement('li');
-            const link = document.createElement('a');
-            link.href = '#'; 
-            link.textContent = term;
-            link.classList.add('recent-search-link');
-            link.dataset.term = term;
-            item.appendChild(link);
-            list.appendChild(item);
-        });
-        recentContainer.appendChild(list);
-
-        recentContainer.addEventListener('click', (e) => {
-            if (e.target.classList.contains('recent-search-link')) {
-                e.preventDefault();
-                const term = e.target.dataset.term;
-                searchInput.value = term;
-                handleSearch(term, container); 
-            }
-        });
-    }
+    const storedRecentSearches = JSON.parse(localStorage.getItem('recentPokemonSearches')) || [];
+    displayRecentSearches(storedRecentSearches);
 
     sortSelect.addEventListener('change', (event) => {
         const sortByValue = event.target.value;
@@ -125,4 +98,38 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 });
 
+function displayRecentSearches(searchTerms) {
+    const recentContainer = document.getElementById('recent-searches');
+
+    recentContainer.innerHTML = '<h4>Recent Searches:</h4>';
+    if (searchTerms.length === 0) {
+        recentContainer.innerHTML += '';
+        return;
+    }
+    const list = document.createElement('ul');
+    searchTerms.forEach(term => {
+        const item = document.createElement('li');
+        const link = document.createElement('a');
+        link.href = '#';
+        link.textContent = term;
+        link.classList.add('recent-search-link');
+        link.dataset.term = term;
+        item.appendChild(link);
+        list.appendChild(item);
+    });
+    recentContainer.appendChild(list);
+
+    recentContainer.addEventListener('click', (e) => {
+        if (e.target.classList.contains('recent-search-link')) {
+            e.preventDefault();
+            const term = e.target.dataset.term;
+            const searchInput = document.getElementById('search-input');
+            const container = document.getElementById('movielist');
+            if (searchInput && container) {
+                searchInput.value = term;
+                handleSearch(term, container);
+            }
+        }
+    });
+}
 

@@ -103,7 +103,7 @@ function displayRecentSearches(searchTerms) {
 
     recentContainer.innerHTML = '<h4>Recent Searches:</h4>';
     if (searchTerms.length === 0) {
-        recentContainer.innerHTML += '';
+        recentContainer.innerHTML += 'You have no recent searches yet';
         return;
     }
     const list = document.createElement('ul');

@@ -1,7 +1,7 @@
 import { createMovieCard } from "./PokemonList.mjs";
 const apiKey = `909bfc0e390cfccd8618b5ec5802f332`;
 
-const mockyUrl = `https://run.mocky.io/v3/36153ceb-bec2-4ba3-ab65-135d97a2c933`;
+const mockyUrl = `https://run.mocky.io/v3/7f08b602-6103-4f51-a356-943af83cf46e`;
 
 let pokemonData = null;
 let isLoading = false;

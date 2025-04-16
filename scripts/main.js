@@ -22,7 +22,16 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const searchForm = document.getElementById('search-form');
     const searchInput = document.getElementById('search-input');
-
+    searchInput.addEventListener('input', function() {
+        const inputValue = this.value;
+        const lettersOnly = /^[a-zA-Z\s]*$/;
+        if (!lettersOnly.test(inputValue)) {
+            this.value = inputValue.replace(/[^a-zA-Z\s]/g, '');
+            alert('Only letters and spaces are allowed.');
+        }
+        
+    });
+    
     const clearSearchButton = document.getElementById('clear-search-button');
     if (clearSearchButton) {
         clearSearchButton.addEventListener('click', () => {

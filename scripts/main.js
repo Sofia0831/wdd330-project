@@ -3,6 +3,7 @@ import { fetchMovies, displayMovies, sortMovies } from "./PokemonList.mjs";
 import { loadMockyData, handleSearch } from "./Search.mjs";
 
 let currentList = [];
+const recentContainer = document.getElementById('recent-searches');
 
 loadMockyData();
 
@@ -60,11 +61,16 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             const searchTerm = searchInput.value.trim();
             if (searchTerm) {
-                handleSearch(searchTerm, container);
                 localStorage.setItem('lastPokemonSearch', searchTerm);
                 let recent = JSON.parse(localStorage.getItem('recentPokemonSearches')) || [];
-                recent = recent.filter(term => term.toLowerCase() !== searchTerm.toLowerCase());
-                recent.unshift(searchTerm);
+                const termIndex = recent.findIndex(term => term.toLowerCase() === searchTerm.toLowerCase());
+                if (termIndex !== -1) {
+                    const existing = recent.splice(termIndex, 1)[0];
+                    recent.unshift(existing);
+                }
+                else {
+                    recent.unshift(searchTerm);
+                }
                 recent = recent.slice(0, 5);
                 localStorage.setItem('recentPokemonSearches', JSON.stringify(recent));
                 displayRecentSearches(recent);
@@ -105,11 +111,22 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     localStorage.setItem("lastVisit", currentDate.toString());
 
+    recentContainer.addEventListener('click', (e) => {
+        if (e.target.classList.contains('recent-search-link')) {
+            e.preventDefault();
+            const term = e.target.dataset.term;
+            const searchInput = document.getElementById('search-input');
+            const container = document.getElementById('movielist');
+            if (searchInput && container) {
+                searchInput.value = term;
+                handleSearch(term, container);
+            }
+        }
+    });
+
 });
 
 function displayRecentSearches(searchTerms) {
-    const recentContainer = document.getElementById('recent-searches');
-
     recentContainer.innerHTML = '<h4>Recent Searches:</h4>';
     if (searchTerms.length === 0) {
         recentContainer.innerHTML += 'You have no recent searches yet';
@@ -128,17 +145,5 @@ function displayRecentSearches(searchTerms) {
     });
     recentContainer.appendChild(list);
 
-    recentContainer.addEventListener('click', (e) => {
-        if (e.target.classList.contains('recent-search-link')) {
-            e.preventDefault();
-            const term = e.target.dataset.term;
-            const searchInput = document.getElementById('search-input');
-            const container = document.getElementById('movielist');
-            if (searchInput && container) {
-                searchInput.value = term;
-                handleSearch(term, container);
-            }
-        }
-    });
 }
 
